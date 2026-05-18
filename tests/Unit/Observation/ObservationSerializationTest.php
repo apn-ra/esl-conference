@@ -10,6 +10,7 @@ use Apntalk\EslConference\Observation\ConferenceObservationFactory;
 use Apntalk\EslConference\Observation\RuntimeObservationContext;
 use Apntalk\EslConference\Tests\Support\FixtureLoader;
 use DateTimeImmutable;
+use DateTimeInterface;
 use PHPUnit\Framework\TestCase;
 
 final class ObservationSerializationTest extends TestCase
@@ -27,5 +28,21 @@ final class ObservationSerializationTest extends TestCase
 
         self::assertSame('2026-01-01T00:00:00+00:00', $observation->toArray()['observed_at']);
         self::assertSame('conn-1', $observation->toArray()['context']['source_connection_id']);
+    }
+
+    public function testTimestampSerializesToAtomString(): void
+    {
+        $timestamp = ConferenceObservationTimestamp::fromDateTime(new DateTimeImmutable('2026-01-01T00:00:00+00:00'));
+        $serialized = $timestamp->toArray();
+
+        self::assertSame('string', gettype($serialized));
+        self::assertSame('2026-01-01T00:00:00+00:00', $serialized);
+        self::assertInstanceOf(DateTimeImmutable::class, DateTimeImmutable::createFromFormat(DateTimeInterface::ATOM, $serialized));
+
+        $parse = (new ConferenceMaintenanceEventFactory())->parse(FixtureLoader::eventHeaders('events/conference_member_left.event'));
+        self::assertNotNull($parse->event);
+
+        $observation = (new ConferenceObservationFactory())->fromEvent($parse->event, $timestamp);
+        self::assertSame($serialized, $observation->toArray()['observed_at']);
     }
 }

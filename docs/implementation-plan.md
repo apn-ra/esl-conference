@@ -540,7 +540,6 @@ ConferenceRoomSnapshot
 ConferenceMemberSnapshot
 ConferenceChannelIdentity
 ConferenceCallerIdentity
-ConferenceOperationResult
 ```
 
 Do not over-model conference names too early.

@@ -19,8 +19,35 @@ final class ComposerDependencyBoundaryTest extends TestCase
         self::assertArrayHasKey('php', $require);
         self::assertArrayHasKey('apntalk/esl-core', $require);
         self::assertCount(2, $require);
-        self::assertArrayNotHasKey('apntalk/esl-react', $require);
-        self::assertArrayNotHasKey('apntalk/esl-replay', $require);
+    }
+
+    public function testRuntimeFrameworkAndReplayDependenciesStayOutOfRequireAndRequireDev(): void
+    {
+        $composer = json_decode((string) file_get_contents(dirname(__DIR__, 2) . '/composer.json'), true, 512, JSON_THROW_ON_ERROR);
+        self::assertIsArray($composer);
+
+        $dependencySets = [
+            'require' => is_array($composer['require'] ?? null) ? $composer['require'] : [],
+            'require-dev' => is_array($composer['require-dev'] ?? null) ? $composer['require-dev'] : [],
+        ];
+
+        $forbiddenPackages = [
+            'apntalk/esl-react',
+            'apntalk/esl-replay',
+            'laravel/framework',
+            'doctrine/dbal',
+            'react/event-loop',
+        ];
+
+        foreach ($dependencySets as $section => $packages) {
+            foreach ($forbiddenPackages as $package) {
+                self::assertArrayNotHasKey($package, $packages, sprintf('%s must not require %s', $section, $package));
+            }
+
+            foreach (array_keys($packages) as $package) {
+                self::assertFalse(str_starts_with($package, 'illuminate/'), sprintf('%s must not require Illuminate packages', $section));
+            }
+        }
     }
 
     public function testStableDocsKeepExceptionsIsolated(): void

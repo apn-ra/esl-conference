@@ -19,4 +19,35 @@ final class ConferenceMemberJoinedEventTest extends TestCase
         self::assertSame('add-member', $result->event->toArray()['action']);
         self::assertSame([], $result->event->toArray()['blockers']);
     }
+
+    public function testRawSummaryExcludesCallerIdentifyingHeaders(): void
+    {
+        $result = (new ConferenceMaintenanceEventFactory())->parse(FixtureLoader::eventHeaders('events/conference_member_joined.event'));
+
+        self::assertInstanceOf(ConferenceMemberJoinedEvent::class, $result->event);
+
+        $summary = $result->event->toArray()['raw_summary'];
+        self::assertIsArray($summary);
+        self::assertSame([
+            'Event-Subclass',
+            'Action',
+            'Conference-Name',
+            'Conference-Profile-Name',
+            'Conference-Size',
+            'Member-ID',
+            'Member-Type',
+            'Channel-Name',
+            'Unique-ID',
+        ], array_keys($summary));
+
+        foreach ([
+            'Caller-Destination-Number',
+            'Caller-Username',
+            'Caller-Context',
+            'Caller-Caller-ID-Number',
+            'Caller-Caller-ID-Name',
+        ] as $removedKey) {
+            self::assertArrayNotHasKey($removedKey, $summary);
+        }
+    }
 }

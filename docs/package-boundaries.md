@@ -4,6 +4,14 @@ This package owns generic FreeSWITCH `mod_conference` facts and transformations.
 
 It does not own tenant, provider_binding, sip_account, campaign, lead, conferenceReady, callReady, Laravel, Eloquent, database, worker, supervisor, canonical lifecycle, or lifecycle snapshot concepts. Those names describe downstream application responsibilities and must not appear in `src/` or stable package APIs.
 
+Allowed documentation exceptions:
+
+- `docs/package-boundaries.md`;
+- `docs/downstream-apntalk-integration.md`;
+- `docs/implementation-plan.md`.
+
+`docs/implementation-plan.md` is the authoritative scoping document and must enumerate the forbidden downstream/APNTalk surface so the package can prove it does not implement it.
+
 Allowed responsibilities:
 
 - command text generation for proven `mod_conference` commands;

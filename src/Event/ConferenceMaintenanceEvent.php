@@ -117,9 +117,6 @@ class ConferenceMaintenanceEvent
             'Member-Type',
             'Channel-Name',
             'Unique-ID',
-            'Caller-Destination-Number',
-            'Caller-Username',
-            'Caller-Context',
         ];
         $summary = [];
 

@@ -29,6 +29,11 @@ final readonly class ConferenceObservationTimestamp
         return $this->value;
     }
 
+    /**
+     * @return string ATOM-formatted timestamp string. The method keeps the package-wide
+     *                serialization naming convention even though this value object
+     *                serializes to a scalar.
+     */
     public function toArray(): string
     {
         return $this->value->format(DateTimeInterface::ATOM);

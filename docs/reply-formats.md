@@ -29,7 +29,7 @@ The member parser accepts semicolon-delimited lines with at least these fields:
 member id;channel name;channel uuid;caller name;caller number;flags
 ```
 
-Additional trailing fields are preserved only as part of the supported row tolerance; they are not interpreted as stable 0.1.0 fields.
+Additional trailing fields in `conference <name> list` member rows are tolerated but not retained on `ConferenceMemberSnapshot` in 0.1.0. They are ignored because they are not interpreted as stable 0.1.0 fields.
 
 Lenient mode can return partial snapshots with blockers. Strict mode fails closed when required fields are missing or the reply is unsupported.
 

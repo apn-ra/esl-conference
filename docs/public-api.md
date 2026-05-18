@@ -14,6 +14,24 @@
 
 Stable APIs are covered by contract fixtures and documented in `docs/freeswitch-vocabulary-provenance.md`. The bounded add-member, del-member, member list, and rejected list reply path has sanitized live fixture evidence from the local FreeSWITCH lab. Empty and unparseable reply fixtures remain synthetic negative contract fixtures.
 
+### Observation `raw_summary`
+
+`raw_summary` is a bounded diagnostic summary of selected FreeSWITCH event headers. It is not a full raw event dump and must not contain caller-identifying headers.
+
+Stable 0.1.0 allowed keys:
+
+- `Event-Subclass`
+- `Action`
+- `Conference-Name`
+- `Conference-Profile-Name`
+- `Conference-Size`
+- `Member-ID`
+- `Member-Type`
+- `Channel-Name`
+- `Unique-ID`
+
+Downstream systems that need application-owned context must attach that context outside `esl-conference`.
+
 ## Unsupported in 0.1.0
 
 - `json_list` parsing.
