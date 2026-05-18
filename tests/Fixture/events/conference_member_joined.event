@@ -1,0 +1,15 @@
+Event-Name: CUSTOM
+Event-Subclass: conference::maintenance
+Action: add-member
+Conference-Name: support-1001
+Conference-Profile-Name: default
+Conference-Size: 1
+Member-ID: 1
+Member-Type: member
+Channel-Name: loopback/9196-a
+Unique-ID: 11111111-1111-4111-8111-111111111111
+Caller-Caller-ID-Number: 9196
+Caller-Caller-ID-Name: Outbound Call
+Caller-Destination-Number: 9196
+Caller-Username: 9196
+Caller-Context: default

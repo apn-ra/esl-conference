@@ -18,7 +18,6 @@ The main changes from the earlier plan are:
 ## 1. Strategic Intent
 
 Create `apntalk/esl-conference` as a **generic, framework-agnostic FreeSWITCH `mod_conference` protocol/domain package**.
-
 Its purpose is **not** to make APNTalk pass a lifecycle requirement. Its purpose is to provide a durable, reusable conference layer for any PHP system that consumes FreeSWITCH ESL events and commands.
 
 The package owns only FreeSWITCH conference primitives:
@@ -1835,4 +1834,3 @@ Does that FreeSWITCH fact make this tenant/account/binding/session conferenceRea
 ```
 
 That boundary keeps the package generic, multi-PBX-friendly, and useful beyond APNTalk while preventing FreeSWITCH provider logic from leaking into canonical lifecycle authority.
-

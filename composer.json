@@ -1,0 +1,51 @@
+{
+    "name": "apntalk/esl-conference",
+    "type": "library",
+    "description": "Framework-agnostic FreeSWITCH mod_conference domain primitives for PHP ESL integrations.",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "apntalk/esl-core": "^0.2"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.76",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Apntalk\\EslConference\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Apntalk\\EslConference\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "unit": "phpunit --testsuite Unit",
+        "contract": "phpunit --testsuite Contract",
+        "fixture": "phpunit --testsuite Fixture",
+        "integration": "phpunit --testsuite Integration",
+        "boundary": "phpunit --testsuite Boundary",
+        "analyse": "phpstan analyse",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "check": [
+            "@cs-check",
+            "@analyse",
+            "@unit",
+            "@contract",
+            "@fixture",
+            "@integration",
+            "@boundary"
+        ],
+        "live-check": "phpunit --testsuite Live"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "stable"
+}

@@ -1,0 +1,9 @@
+Event-Name: CUSTOM
+Event-Subclass: conference::maintenance
+Action: add-member
+Conference-Profile-Name: default
+Conference-Size: 1
+Member-ID: 7
+Member-Type: caller
+Channel-Name: sofia/internal/1001@example.test
+Unique-ID: 11111111-1111-4111-8111-111111111111

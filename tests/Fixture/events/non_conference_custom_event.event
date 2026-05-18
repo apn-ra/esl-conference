@@ -1,0 +1,4 @@
+Event-Name: CUSTOM
+Event-Subclass: sofia::register
+Action: register
+User: 1001
