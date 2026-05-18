@@ -5,6 +5,7 @@
 .php-cs-fixer.cache
 .psalm/
 .phpactor.json
+.agents
 .idea/
 .codex
 .env
